@@ -1,0 +1,40 @@
+name: Run mabl tests
+
+on:
+
+  push:
+
+    branches: [ main ]
+
+jobs:
+
+  mabl-test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+
+        uses: actions/checkout@v3
+
+      - name: Install Node
+
+        uses: actions/setup-node@v3
+
+        with:
+
+          node-version: 18
+
+      - name: Install mabl CLI
+
+        run: npm install -g @mablhq/mabl-cli
+
+      - name: Run mabl tests
+
+        env:
+
+          MABL_API_KEY: ${{ secrets.MABL_API_KEY }}
+
+        run: mabl tests run y7D4mRvTJLZryYu8IZmPyQ-j
+ 
