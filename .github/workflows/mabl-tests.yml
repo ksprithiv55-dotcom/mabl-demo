@@ -1,3 +1,4 @@
+
 name: Run mabl tests
 
 on:
@@ -20,25 +21,22 @@ jobs:
 
       - name: Checkout repository
 
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Install Node.js
+      - name: Run mabl tests
 
-        uses: actions/setup-node@v3
+        uses: mablhq/github-run-tests-action@v1
+
+        env:
+
+          MABL_API_KEY: ${{ secrets.MABL_API_KEY }}
+
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
         with:
 
-          node-version: 18
+          application-id: CaKDmntpsouy6ULyOw7CgQ-a
 
-      - name: Install mabl CLI
-
-        run: npm install -g @mablhq/mabl-cli
-
-      - name: Authenticate mabl CLI
-
-        run: mabl auth activate-key ${{ secrets.MABL_API_KEY }}
-
-      - name: Execute specific mabl test
-
-        run: mabl tests run --id y7D4mRvTJLZryYu8IZmPyQ-j -a CaKDmntpsouy6ULyOw7CgQ-a -e CaTSk6sBluIijdMfqSWe6A-e --headless
+          environment-id: CaTSk6sBluIijdMfqSWe6A-e
+ 
  
